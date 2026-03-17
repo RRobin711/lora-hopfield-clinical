@@ -1,0 +1,18 @@
+{
+  "rank": "hopfield",
+  "config": "hopfield",
+  "seed": 42,
+  "beta": 0.5,
+  "beta_multiplier": 4.0,
+  "d_head": 64,
+  "num_iters": 1,
+  "trainable_params": 1538,
+  "total_params": 124441346,
+  "trainable_pct": 0.0012359236294342236,
+  "test_accuracy": 0.5426573426573427,
+  "test_f1_macro": 0.5382313731299067,
+  "best_val_loss": 0.6660859643573492,
+  "best_epoch": 16,
+  "total_training_time_s": 1043.6,
+  "wandb_run_id": "lo3m611g"
+}

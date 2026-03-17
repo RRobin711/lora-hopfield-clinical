@@ -1,0 +1,18 @@
+{
+  "config": "lora+hopfield",
+  "rank": 8,
+  "seed": 42,
+  "beta": 0.125,
+  "beta_multiplier": 1.0,
+  "d_head": 64,
+  "num_iters": 1,
+  "trainable_params": 296450,
+  "total_params": 124736258,
+  "trainable_pct": 0.2376614504501169,
+  "test_accuracy": 0.7678321678321678,
+  "test_f1_macro": 0.7662404676372345,
+  "best_val_loss": 0.41281195278738586,
+  "best_epoch": 27,
+  "total_training_time_s": 3124.4,
+  "wandb_run_id": "4dmqqxjv"
+}
