@@ -1,0 +1,13 @@
+{
+  "rank": 0,
+  "seed": 42,
+  "trainable_params": 1538,
+  "total_params": 124441346,
+  "trainable_pct": 0.0012359236294342236,
+  "test_accuracy": 0.6741258741258741,
+  "test_f1_macro": 0.6729975405379411,
+  "best_val_loss": 0.5559427713004637,
+  "best_epoch": 30,
+  "total_training_time_s": 1762.8,
+  "wandb_run_id": "yq5x52zv"
+}

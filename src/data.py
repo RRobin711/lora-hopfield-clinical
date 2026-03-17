@@ -23,6 +23,7 @@ from dataclasses import dataclass
 
 import torch
 from datasets import Dataset, load_dataset
+from sklearn.model_selection import StratifiedShuffleSplit
 from torch.utils.data import DataLoader
 from transformers import PreTrainedTokenizerBase
 
@@ -126,14 +127,16 @@ def load_dreaddit(
 
     raw = load_dataset(config.dataset_name)
 
-    # Stratified train/val split from the official train set
-    train_val = raw["train"].train_test_split(
-        test_size=config.val_fraction,
-        seed=config.seed,
-        stratify_by_column="label",
+    # Stratified train/val split from the official train set.
+    # label column is Value dtype, not ClassLabel — HF stratify_by_column
+    # requires ClassLabel; sklearn StratifiedShuffleSplit works on raw arrays
+    labels = raw["train"]["label"]
+    splitter = StratifiedShuffleSplit(
+        n_splits=1, test_size=config.val_fraction, random_state=config.seed
     )
-    train_ds = tokenize_dataset(train_val["train"], tokenizer, config.max_length)
-    val_ds = tokenize_dataset(train_val["test"], tokenizer, config.max_length)
+    train_indices, val_indices = next(splitter.split(labels, labels))
+    train_ds = tokenize_dataset(raw["train"].select(train_indices), tokenizer, config.max_length)
+    val_ds = tokenize_dataset(raw["train"].select(val_indices), tokenizer, config.max_length)
     test_ds = tokenize_dataset(raw["test"], tokenizer, config.max_length)
 
     train_loader = DataLoader(

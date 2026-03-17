@@ -1,0 +1,13 @@
+{
+  "rank": 8,
+  "seed": 42,
+  "trainable_params": 296450,
+  "total_params": 124736258,
+  "trainable_pct": 0.2376614504501169,
+  "test_accuracy": 0.7426573426573426,
+  "test_f1_macro": 0.7426447574334898,
+  "best_val_loss": 0.46281458101641965,
+  "best_epoch": 18,
+  "total_training_time_s": 2208.1,
+  "wandb_run_id": "3qh60b02"
+}

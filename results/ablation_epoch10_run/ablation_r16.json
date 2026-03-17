@@ -1,0 +1,13 @@
+{
+  "rank": 16,
+  "seed": 42,
+  "trainable_params": 591362,
+  "total_params": 125031170,
+  "trainable_pct": 0.4729716597869155,
+  "test_accuracy": 0.6643356643356644,
+  "test_f1_macro": 0.6643350077461152,
+  "best_val_loss": 0.5714596098577472,
+  "best_epoch": 10,
+  "total_training_time_s": 1048.2,
+  "wandb_run_id": "ivaw4khc"
+}

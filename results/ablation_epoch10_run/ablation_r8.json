@@ -1,0 +1,13 @@
+{
+  "rank": 8,
+  "seed": 42,
+  "trainable_params": 296450,
+  "total_params": 124736258,
+  "trainable_pct": 0.2376614504501169,
+  "test_accuracy": 0.6447552447552447,
+  "test_f1_macro": 0.6441698799335402,
+  "best_val_loss": 0.6029289662837982,
+  "best_epoch": 10,
+  "total_training_time_s": 1049.8,
+  "wandb_run_id": "dugh977c"
+}

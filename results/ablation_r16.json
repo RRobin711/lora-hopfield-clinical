@@ -1,0 +1,13 @@
+{
+  "rank": 16,
+  "seed": 42,
+  "trainable_params": 591362,
+  "total_params": 125031170,
+  "trainable_pct": 0.4729716597869155,
+  "test_accuracy": 0.7538461538461538,
+  "test_f1_macro": 0.7538225581795702,
+  "best_val_loss": 0.43928293778862754,
+  "best_epoch": 18,
+  "total_training_time_s": 2179.2,
+  "wandb_run_id": "g8mkyemx"
+}

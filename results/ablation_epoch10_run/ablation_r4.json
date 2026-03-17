@@ -1,0 +1,13 @@
+{
+  "rank": 4,
+  "seed": 42,
+  "trainable_params": 148994,
+  "total_params": 124588802,
+  "trainable_pct": 0.11958859673439994,
+  "test_accuracy": 0.6055944055944056,
+  "test_f1_macro": 0.6016665876440188,
+  "best_val_loss": 0.6264021405031983,
+  "best_epoch": 10,
+  "total_training_time_s": 1047.6,
+  "wandb_run_id": "mz14fl4y"
+}

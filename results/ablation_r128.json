@@ -1,0 +1,13 @@
+{
+  "rank": 128,
+  "seed": 42,
+  "trainable_params": 4720130,
+  "total_params": 129159938,
+  "trainable_pct": 3.6544845662592373,
+  "test_accuracy": 0.7692307692307693,
+  "test_f1_macro": 0.7669974818545401,
+  "best_val_loss": 0.4136393976883149,
+  "best_epoch": 13,
+  "total_training_time_s": 1678.5,
+  "wandb_run_id": "ggr67mmv"
+}

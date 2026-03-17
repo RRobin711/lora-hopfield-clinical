@@ -1,0 +1,13 @@
+{
+  "rank": 32,
+  "seed": 42,
+  "trainable_params": 1181186,
+  "total_params": 125620994,
+  "trainable_pct": 0.9402775462833863,
+  "test_accuracy": 0.7664335664335664,
+  "test_f1_macro": 0.7654627987326879,
+  "best_val_loss": 0.41705622429579076,
+  "best_epoch": 17,
+  "total_training_time_s": 2100.2,
+  "wandb_run_id": "pq2plsoj"
+}

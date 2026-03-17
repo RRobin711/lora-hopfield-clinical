@@ -1,0 +1,13 @@
+{
+  "rank": 1,
+  "seed": 42,
+  "trainable_params": 38402,
+  "total_params": 124478210,
+  "trainable_pct": 0.030850379355551464,
+  "test_accuracy": 0.6951048951048951,
+  "test_f1_macro": 0.6950565789679621,
+  "best_val_loss": 0.5237725717081151,
+  "best_epoch": 30,
+  "total_training_time_s": 3118.6,
+  "wandb_run_id": "vuykn55l"
+}

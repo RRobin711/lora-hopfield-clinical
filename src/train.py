@@ -75,7 +75,7 @@ class TrainConfig:
     """
 
     lr: float = 2e-5
-    num_epochs: int = 10
+    num_epochs: int = 30
     warmup_fraction: float = 0.1
     max_grad_norm: float = 1.0
     patience: int = 3
@@ -281,6 +281,7 @@ def train(
         wandb.init(
             project=config.wandb_project,
             name=config.run_name,
+            reinit=True,
             config={
                 **asdict(config),
                 "total_params": total_params,
@@ -292,6 +293,7 @@ def train(
 
     # Early stopping state
     best_val_loss = float("inf")
+    best_epoch = 0
     epochs_without_improvement = 0
     checkpoint_dir = Path(config.checkpoint_dir)
     checkpoint_dir.mkdir(parents=True, exist_ok=True)
@@ -390,6 +392,7 @@ def train(
         # Early stopping on validation loss
         if val_loss < best_val_loss:
             best_val_loss = val_loss
+            best_epoch = epoch + 1
             epochs_without_improvement = 0
 
             # Save best checkpoint
@@ -437,6 +440,8 @@ def train(
         test_metrics["f1_macro"],
     )
 
+    # Capture W&B run ID before finish() sets wandb.run to None
+    wandb_run_id = None
     if config.wandb_enabled:
         import wandb
 
@@ -448,6 +453,8 @@ def train(
             },
             step=global_step,
         )
+        if wandb.run is not None:
+            wandb_run_id = wandb.run.id
         wandb.finish()
 
     results = {
@@ -457,7 +464,9 @@ def train(
         "trainable_params": trainable_count,
         "trainable_pct": trainable_pct,
         "epochs_trained": len(history),
+        "best_epoch": best_epoch,
         "best_val_loss": best_val_loss,
+        "wandb_run_id": wandb_run_id,
         "history": history,
         "test_loss": test_loss,
         "test_accuracy": test_metrics["accuracy"],

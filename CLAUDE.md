@@ -698,3 +698,64 @@ These patterns make the codebase look LLM-generated. Do not use them.
   and GPU (training) without changes
 
 </do_not_do>
+
+---
+
+<sprint_progress>
+
+## Sprint Progress (Updated 2026-03-16)
+
+### Completed Days
+
+**Day 12: src/lora.py — COMPLETE**
+- LoRALinear with zero-init B, Kaiming-uniform A, frozen base weight
+- LoRAConfig dataclass, from_linear() classmethod for Conv1D conversion path
+- 31/31 tests passing (test_lora.py)
+
+**Day 13: src/hopfield.py — COMPLETE**
+- HopfieldAttention with configurable β (inverse temperature)
+- hopfield_retrieval() pure function for testability
+- At β = 1/√d_head, exactly recovers standard scaled dot-product attention
+- Multi-iteration support (converges toward Hopfield energy minimum)
+- 30/30 tests passing (test_hopfield.py)
+
+**Day 14: src/data.py, src/train.py, src/evaluate.py — COMPLETE**
+- data.py: DREADDIT loading, GPT-2 tokenization, stratified train/val/test split
+- train.py: shared training loop with W&B, early stopping, LR scheduling,
+  optimizer on trainable params only (filter requires_grad)
+- evaluate.py: accuracy, F1 macro, confusion matrix, JSON-serializable output
+- 33/33 tests passing (test_data.py, test_train.py, test_evaluate.py)
+
+**Day 15: src/model.py — COMPLETE**
+- GPT-2 loading via GPT2Model (NOT GPT2LMHeadModel — train.py needs last_hidden_state)
+- conv1d_to_linear(): weight transpose (in,out) -> (out,in) for Conv1D -> nn.Linear
+- inject_lora(): standalone function, freezes all base weights, replaces target Conv1D
+- verify_lora_injection(): post-injection diagnostic (param counts, freeze checks)
+- freeze_all_parameters() / unfreeze_all_parameters() for baseline + full fine-tune
+- 26/26 tests passing (test_model.py), smoke test passed on CPU
+
+**Total test suite: 120/120 passing**
+
+### Key Facts for Day 16
+
+- DREADDIT dataset path: `andreagasparini/dreaddit` (NOT `dkmkknub/dreaddit` — that path is dead)
+- Model class: `GPT2Model` (base transformer) — `outputs.last_hidden_state` exists here,
+  not on `GPT2LMHeadModel` which returns `.logits` instead
+- Conv1D -> Linear: weight must be transposed. Conv1D stores (in, out), nn.Linear stores (out, in).
+  Verified numerically equivalent with test_model.py::TestConv1dToLinear
+- LoRA r=4 on c_attn across 12 blocks: 147,456 trainable adapter params (0.12% of 124M total)
+- Smoke test ran on CPU only — GPU verification (ROCm/RX 6700S) is Day 16 first action
+- Classification head: nn.Linear(768, 2) created in train.py, extracts last non-pad token
+  hidden state via attention_mask.sum(-1) - 1
+- W&B project: `lora-hopfield-clinical`
+- Run naming convention: `"lora-r{rank}-s{seed}"`, `"frozen-baseline-s{seed}"`, `"full-finetune-s{seed}"`
+
+### Day 16 Deliverables
+
+1. GPU smoke test (HSA_OVERRIDE_GFX_VERSION=10.3.0, verify CUDA available)
+2. scripts/run_lora_ablation.py — single-rank and sequential-all modes
+3. scripts/aggregate_results.py — must exist BEFORE running any ablation
+4. First full training run: LoRA r=4, seed=42, on GPU
+5. Rank ablation: r in {1, 4, 8, 16, 32}
+
+</sprint_progress>
