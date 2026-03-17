@@ -150,15 +150,28 @@ def main() -> None:
         "--seed", type=int, default=42, help="Random seed (default: 42)."
     )
     parser.add_argument(
+        "--lr",
+        type=float,
+        default=2e-5,
+        help=(
+            "Peak learning rate. Default 2e-5 matches TrainConfig for backward "
+            "compatibility. For full fine-tune on small datasets, 5e-6 is "
+            "recommended (Mosbach et al., 2021) — 2e-5 causes memorization "
+            "in <3 epochs with 124M unfrozen params on ~2800 samples."
+        ),
+    )
+    parser.add_argument(
         "--output",
         type=str,
         default=None,
-        help="Override output path (default: results/full_finetune_s{seed}.json).",
+        help="Override output path (default: results/full_finetune_s{seed}_lr{lr}.json).",
     )
     args = parser.parse_args()
 
+    # Format lr for filenames: 5e-06 -> "5e-06", 2e-05 -> "2e-05"
+    lr_tag = f"{args.lr:.0e}"
     output_path = Path(
-        args.output or f"results/full_finetune_s{args.seed}.json"
+        args.output or f"results/full_finetune_s{args.seed}_lr{lr_tag}.json"
     )
 
     Path("results").mkdir(parents=True, exist_ok=True)
@@ -190,8 +203,8 @@ def main() -> None:
         )
         sys.exit(1)
 
-    run_name = f"full-finetune-s{args.seed}"
-    logger.info("Starting %s (all parameters unfrozen)", run_name)
+    run_name = f"full-finetune-s{args.seed}-lr{lr_tag}"
+    logger.info("Starting %s (all parameters unfrozen, lr=%s)", run_name, args.lr)
 
     start_time = time.time()
 
@@ -199,6 +212,7 @@ def main() -> None:
     unfreeze_all_parameters(model)
 
     train_config = TrainConfig(
+        lr=args.lr,
         seed=args.seed,
         run_name=run_name,
         wandb_project="lora-hopfield-clinical",
@@ -218,6 +232,7 @@ def main() -> None:
     result_json = {
         "rank": "full",
         "seed": args.seed,
+        "lr": args.lr,
         "trainable_params": raw_results["trainable_params"],
         "total_params": raw_results["total_params"],
         "trainable_pct": raw_results["trainable_pct"],

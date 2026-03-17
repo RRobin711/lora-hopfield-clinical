@@ -1,0 +1,13 @@
+{
+  "rank": "full",
+  "seed": 42,
+  "trainable_params": 124441346,
+  "total_params": 124441346,
+  "trainable_pct": 100.0,
+  "test_accuracy": 0.7566433566433567,
+  "test_f1_macro": 0.7504092638066349,
+  "best_val_loss": 0.41958615435680874,
+  "best_epoch": 2,
+  "total_training_time_s": 661.4,
+  "wandb_run_id": "7ex5isv2"
+}
