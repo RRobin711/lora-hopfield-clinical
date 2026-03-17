@@ -189,7 +189,7 @@ class TestTrainConfig:
     def test_defaults(self) -> None:
         cfg = TrainConfig()
         assert cfg.lr == 2e-5
-        assert cfg.num_epochs == 10
+        assert cfg.num_epochs == 30
         assert cfg.warmup_fraction == 0.1
         assert cfg.max_grad_norm == 1.0
         assert cfg.patience == 3

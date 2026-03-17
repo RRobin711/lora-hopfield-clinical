@@ -1,0 +1,15 @@
+{
+  "rank": "hopfield",
+  "seed": 42,
+  "beta": 0.125,
+  "num_iters": 1,
+  "trainable_params": 1538,
+  "total_params": 124441346,
+  "trainable_pct": 0.0012359236294342236,
+  "test_accuracy": 0.6811188811188811,
+  "test_f1_macro": 0.6771778907846585,
+  "best_val_loss": 0.5496443312772563,
+  "best_epoch": 30,
+  "total_training_time_s": 1724.5,
+  "wandb_run_id": "3fx5qwm1"
+}
