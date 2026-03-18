@@ -4,6 +4,7 @@ Reimplementing [LoRA](https://arxiv.org/abs/2106.09685) (Hu et al., 2021) and [M
 
 **Phase 2** of a [30-day AI/ML portfolio sprint](https://github.com/RRobin711). Phase 1 (a clinical RAG system) is at [huggingface.co/spaces/RRobin711/clinical-rag](https://huggingface.co/spaces/RRobin711/clinical-rag).
 
+Blog Post: [https://medium.com/@rryanb711/what-i-got-wrong-before-i-got-it-right-reimplementing-lora-and-hopfield-attention-from-scratch-fd537433e2e8]
 ---
 
 ## Results
